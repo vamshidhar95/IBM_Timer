@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>IBM Timer</title>
+  <!-- <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script> -->
+  <!-- <script src="./timer.js"></script> -->
+  <!-- <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet"> -->
+  <link rel="stylesheet" href="fonts/fonts.css">
+  <!-- <script src="https://kit.fontawesome.com/a076d05399.js"></script> -->
+
+  <style media="screen">
+    @keyframes blinking {
+      0%{
+        background-color: #faebd7;
+      }
+      100%{
+        background-color: #f31c45;
+      }
+    }
+
+    html{
+      height: 100%;
+    }
+    body{
+      margin: 0px;
+      display: flex;
+      height: inherit;
+      align-items: center;
+      flex-direction: column;
+      border: 0px solid grey;
+      justify-content: center;
+      background-color: #faebd7;
+      font-family: 'Montserrat', sans-serif;
+    }
+    #timer-section{
+      width: 50%;
+      padding-left: 50px;
+      padding-right: 50px;
+      text-align: center;
+      border-radius: 10px;
+      background-color: #1b1b1b;
+    }
+    button {
+      border: none;
+      color: white;
+      font-size: 16px;
+      margin: 4px 2px;
+      cursor: pointer;
+      font-weight: 500;
+      text-align: center;
+      padding: 15px 32px;
+      letter-spacing: 3px;
+      text-decoration: none;
+      text-transform: uppercase;
+      background-color: #555555; /* Black */
+      font-family: 'Montserrat', sans-serif;
+    }
+    input{
+      border: 0px;
+      width: 200px;
+      height: 30px;
+      font-size: 16px;
+      font-weight: 600;
+      text-align: center;
+      letter-spacing: 2px;
+      border-bottom: 1px solid grey;
+      background-color: transparent;
+      font-family: 'Montserrat', sans-serif;
+    }
+    #header{
+      font-size: 24px;
+    }
+    #current-timer{
+      font-size: 50px;
+      font-family: 'Calculator';
+    }
+    #you-have{
+      font-size: 30px;
+    }
+    #timer-controls{
+      margin-top: 20px;
+    }
+    .timer-font{
+      color: #fff;
+    }
+    #warning-div{
+      display: flex;
+      justify-content: center;
+      margin-bottom: 20px;
+      border-radius: 10px;
+    }
+    #stop-button{
+      width: 20px;
+      margin-bottom: -4px;
+    }
+    #allow-audio-note{
+      position: absolute;
+      bottom: 0;
+    }
+    #warning-img-icon{
+      width: 12px;
+    }
+  </style>
+</head>
+<script src = "/socket.io/socket.io.js"></script>
+<script src="jquery.min.js"></script>
+
+ <script>
+    var socket = io();
+ </script>
+
+<body id="body">
+
+  <audio id="audio">
+    <source src="/assets/air_horn.mp3" type="audio/mpeg">
+      Your browser does not support the audio element.
+  </audio>
+
+  <div id="auth-page" hidden>
+    <button id="admin" class="button">Admin</button>
+    <button id="client" class="button">Client</button>
+    <!-- <button id="audiobtn" class="button">AUdio</button> -->
+  </div>
+
+  <div id="admin-login-page" class="" hidden>
+    Admin: <input type="text" id="admin-name" placeholder="Admin name" value=""> </br></br>
+    Admin: <input type="password" id="admin-password" placeholder="Admin password" value=""></br></br>
+    <button id="admin-login">Login</button>
+  </div>
+
+  <div id="client-page" hidden>
+
+  </div>
+
+  <div id="admin-page" class="" hidden>
+    <h3 id="header">Admin Page</h3></br>
+    <div id="time-settings">
+      <h4>SET TIMER :</h4>
+      Minutes: <input type="number" id="mins" placeholder="Minutes" value="" min="0" max="100"> </br></br>
+      Seconds: <input type="number" id="secs" placeholder="Seconds" value="" min="0" max="100"> </br></br>
+      Countdown Seconds: <input type="number" id="countdown" placeholder="Countdown seconds" value=""> </br></br>
+    </div>
+  </div>
+
+  <div id="timer-section" hidden>
+    <h3 id="you-have" class="timer-font">You Have</h3>
+    <div id="warning-div">
+      <p id="current-timer" class="timer-font"><span id="min-count">00</span> : <span id="sec-count">00 Sec</span></p>
+    </div>
+  </div>
+
+  <div id="timer-controls" hidden>
+    <button id="start"><img src="assets/play.png"> Play</button>
+    <button id="resume" hidden><img src="assets/play.png"> Resume</button>
+    <button id="pause" hidden><img src="assets/pause.png"> Pause</button>
+    <button id="stop" hidden><img id="stop-button" src="assets/stop.png"> Stop</button>
+  </div>
+
+  <div id="allow-audio-note">
+    <p style="font-size: 13px"><b>*</b>Please ALLOW Audio in your <img id="warning-img-icon" src="assets/settings.png"> <b>Site Settings</b>. Click on <img id="warning-img-icon" src="assets/information.png"> / <img id="warning-img-icon" src="assets/lock.png"> besides URL to go to settings.</p>
+  </div>
+
+</body>
+<script type="text/javascript" src="timer.js"></script>
+</html>

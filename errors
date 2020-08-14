@@ -1,0 +1,5 @@
+USER UNSELECTED INSTANCE PROBLEM:
+
+-> When I opened 3 instances and of which, one is client, second is  admin and other selected none, then the admin started the timer which broadcasted the event to all three instances.
+
+-> The third instance when clicked client, then it missed the track of previous timer and ran out of track and started ticking negative after crossing zero.
